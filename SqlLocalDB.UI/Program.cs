@@ -36,6 +36,9 @@ namespace SqlLocalDB.UI
             // LocalDB操作
             var processor = new Processor(Settings);
 
+            // Stop
+            processor.Stop();
+
             // Delete
             processor.Delete();
 

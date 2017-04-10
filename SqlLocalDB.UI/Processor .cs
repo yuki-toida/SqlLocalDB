@@ -21,6 +21,12 @@ namespace SqlLocalDB.UI
             };
         }
 
+        public void Stop()
+        {
+            _info.Arguments = $"stop {_settings.InstanceName}";
+            StartAndWaitForExit();
+        }
+
         public void Delete()
         {
             _info.Arguments = $"delete {_settings.InstanceName}";
@@ -44,8 +50,10 @@ namespace SqlLocalDB.UI
         /// </summary>
         private void StartAndWaitForExit()
         {
-            var process = Process.Start(_info);
-            process.WaitForExit();
+            using (var process = Process.Start(_info))
+            {
+                process.WaitForExit();
+            }
         }
     }
 }
